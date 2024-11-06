@@ -12,7 +12,7 @@ const commands = [
     
   ];
 
-const rest = new REST({ version: '10' }).setToken('MTMwMzYyNTgxNTQ3NjUzOTQzMw.Gw4LGp.eaGLIOitnyOGEjvXWD7OT_2q26TVMuPPgA3Xcc');
+const rest = new REST({ version: '10' }).setToken('MTMwMzYyNTgxNTQ3NjUzOTQzMw.G4K8fG.fgvEq0ZPLgeg6kMvaAR7ABDBTGzczp1IvLRu6cc');
 
 try {
     console.log('Started refreshing application (/) commands.');

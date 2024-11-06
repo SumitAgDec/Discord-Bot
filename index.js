@@ -1,3 +1,10 @@
+require('dotenv').config()
+const {handleShortUrl} = require('./controller/url.controller')
+const {connectionToMongoDb} = require('./connection/connectDb')
+
+//Db connect
+connectionToMongoDb('mongodb://127.0.0.1:27017/Discord-bot')
+
 const { Client, GatewayIntentBits, Message } = require('discord.js');
 const client = new Client({ 
     intents: [
@@ -6,12 +13,13 @@ const client = new Client({
         GatewayIntentBits.MessageContent
     ] });
 
-client.on('messageCreate', (message) => {
+client.on('messageCreate', async (message) => {
     if(message.author.bot) return ;
     if(message.content.startsWith('create')){
         const url = message.content.split("create")[1]
+        const shortUrl = await handleShortUrl(url)
         return message.reply({
-            content : url
+            content : `Your short URL is http://yourdomain.com/${shortUrl}`
         })
     }
     message.reply({
@@ -23,4 +31,4 @@ client.on('interactionCreate', interaction => {
     interaction.reply("Pong")
 })
 
-client.login("MTMwMzYyNTgxNTQ3NjUzOTQzMw.Gw4LGp.eaGLIOitnyOGEjvXWD7OT_2q26TVMuPPgA3Xcc")
+client.login(process.env.DISCORD_TOKEN)
